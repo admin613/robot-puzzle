@@ -16,7 +16,7 @@ public class ToggleBlocks : MonoBehaviour
         {
             if (position != null)
             {
-                tilemap.RemoveTileFlags(position, TileFlags.LockColor);
+                tilemap.SetTileFlags(position, TileFlags.None);
                 tilemap.SetColor(position, new Color(255, 0, 0, 255));
                 
 
@@ -43,9 +43,10 @@ public class ToggleBlocks : MonoBehaviour
                     tilemap.SetColor(position, new Color(255, 0, 0,255));
                    
                 }
-                else {
+                else
+                { 
                     tp.enabled = false;
-                    tilemap.SetColor(position, new Color(255, 255, 255, 255));
+                    tilemap.SetColor(position, new Color(255, 0, 0, 0.3f));
                     
                 }
                     

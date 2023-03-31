@@ -11,8 +11,9 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
     public float movespeed;
     private float direction;
-    bool facingRight;
-
+    public bool facingRight;
+    public int bounceforce = 1500;
+    private ToggleBlocks tb;
 
 
     [Header("Jumping")]
@@ -35,6 +36,7 @@ public class PlayerMove : MonoBehaviour
 
     [Header("AreaShift")]
     public GameManager manager;
+    private bool ioujump = true;
 
     [Header("Take Damage")]
     public float flashTime;
@@ -47,8 +49,8 @@ public class PlayerMove : MonoBehaviour
     {
         rb.GetComponent<Rigidbody2D>();
         facingRight = true;
+        tb = GameObject.FindWithTag("toggle").GetComponent<ToggleBlocks>();
 
-     
     }
 
     // Update is called once per frame
@@ -114,12 +116,31 @@ public class PlayerMove : MonoBehaviour
     {
         animator.SetBool("IsJumping", false);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.tag == "jumppad")
+            rb.AddForce(Vector2.up * bounceforce);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag == "redtileswitch")
+        {
+            tb.switchTile();
+            collision.gameObject.SetActive(false);
+        }
+        if(collision.gameObject.tag == "JumpTrigger")
+        {
+            if (ioujump)
+                bounceforce = 1700;
+            else
+                bounceforce = 1300;
+            ioujump = !ioujump;
+        }
+
         if (collision.gameObject.tag == "Spikes")
         {
-            Debug.Log("aaa");
+            
             touchingspikes = true;
             StartCoroutine(DamageFlash());
         }
@@ -127,6 +148,11 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.tag == "Shift")
         {
             manager.ShiftCamera();
+        }
+
+        if(collision.gameObject.tag == "VerticalShift")
+        {
+            manager.VerticalShiftCamera();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

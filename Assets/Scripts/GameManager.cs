@@ -6,11 +6,15 @@ public class GameManager : MonoBehaviour
 {
     public Camera camera;
     public float xShift;
+    public float yShift;
     public GameObject areashift;
     public GameObject blocker;
     private bool shift = false;
     public float speed = 1.0f;
     private Vector3 targetpos;
+    private bool inoroutlevel = true;
+    public PlayerMove pm;
+    
 
    
     void Start()
@@ -42,8 +46,19 @@ public class GameManager : MonoBehaviour
         shift = true;
     }
 
+    public void VerticalShiftCamera()
+    {
+        if(inoroutlevel)
+            targetpos = new Vector3(camera.transform.position.x, camera.transform.position.y + yShift, -10);
+        else
+            targetpos = new Vector3(camera.transform.position.x, camera.transform.position.y - yShift, -10);
+        inoroutlevel = !inoroutlevel;
+        shift = true;
+    }
+ 
 
 
-    
+
+
 
 }

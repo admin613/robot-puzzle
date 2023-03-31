@@ -10,6 +10,10 @@ TagManager:
   - Bounce
   - button
   - toggle
+  - jumppad
+  - VerticalShift
+  - JumpTrigger
+  - redtileswitch
   layers:
   - Default
   - TransparentFX

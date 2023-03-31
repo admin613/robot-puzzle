@@ -25,8 +25,9 @@ public class Laser : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if(collision.gameObject.tag == "button")
-        {
+        { 
             tb.switchTile();
         }
         if(collision.gameObject.tag != "Player")
