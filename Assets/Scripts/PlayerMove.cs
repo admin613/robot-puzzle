@@ -147,9 +147,15 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.tag == "Shift")
         {
-            manager.ShiftCamera();
+            tb.switchTile();
+            manager.ShiftCamera(false);
         }
-
+        if ((collision.gameObject.tag == "leftshift"))
+        {
+            tb.switchTile();
+            manager.ShiftCamera(true);
+        }
+            
         if(collision.gameObject.tag == "VerticalShift")
         {
             manager.VerticalShiftCamera();

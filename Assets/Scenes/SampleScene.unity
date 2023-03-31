@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 147098362}
   - component: {fileID: 147098361}
   m_Layer: 0
-  m_Name: AreaShift (1)
+  m_Name: LeftShift
   m_TagString: Shift
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
