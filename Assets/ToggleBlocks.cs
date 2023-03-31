@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 public class ToggleBlocks : MonoBehaviour
 {
-    public bool Toggle = true;
+    public bool Toggle = false;
     public Tilemap tilemap;
     private TilemapCollider2D tp;
     // Start is called before the first frame update
@@ -12,16 +12,7 @@ public class ToggleBlocks : MonoBehaviour
     {
         tilemap = GetComponent<Tilemap>();
         tp = GetComponent<TilemapCollider2D>();
-        foreach (var position in tilemap.cellBounds.allPositionsWithin)
-        {
-            if (position != null)
-            {
-                tilemap.SetTileFlags(position, TileFlags.None);
-                tilemap.SetColor(position, new Color(255, 0, 0, 255));
-                
-
-            }
-        }
+        switchTile();
     }
 
     // Update is called once per frame
