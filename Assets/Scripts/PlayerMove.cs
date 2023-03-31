@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -34,9 +35,13 @@ public class PlayerMove : MonoBehaviour
 
     [Header("AreaShift")]
     public GameManager manager;
-    
-    
-    
+
+    [Header("Take Damage")]
+    public float flashTime;
+    public float flashInterval;
+    public Image DamageIndicator;
+    bool touchingspikes;
+
 
     void Start()
     {
@@ -112,12 +117,37 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Shift")
+        if (collision.gameObject.tag == "Spikes")
+        {
+            Debug.Log("aaa");
+            touchingspikes = true;
+            StartCoroutine(DamageFlash());
+        }
+
+        if (collision.gameObject.tag == "Shift")
         {
             manager.ShiftCamera();
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Spikes")
+        {
+            touchingspikes = false;
+            StopCoroutine(DamageFlash());
+        }
+    }
+    IEnumerator DamageFlash()
+    {
+        while (touchingspikes == true)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(flashTime);
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            yield return new WaitForSeconds(flashInterval);
+        }
+    }
 
- }
+}
  
 
