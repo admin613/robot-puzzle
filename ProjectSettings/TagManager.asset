@@ -15,6 +15,7 @@ TagManager:
   - JumpTrigger
   - redtileswitch
   - leftshift
+  - key
   layers:
   - Default
   - TransparentFX
