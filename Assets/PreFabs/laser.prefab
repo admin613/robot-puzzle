@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 523943324761637859}
   m_Layer: 0
   m_Name: laser
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc9d52f9e45a7d4d9a6397cb3835a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tb: {fileID: 45939858710369294, guid: ab2d874d07afe6245968e05f3dbcfb70, type: 3}
   rb: {fileID: 2173351865041967644}
 --- !u!61 &523943324761637859
 BoxCollider2D:

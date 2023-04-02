@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public void ShiftCamera(bool isleft)
     {   
         blocker.GetComponent<BoxCollider2D>().isTrigger = false;
-        Destroy(areashift, 0.1f);
+        
         if(isleft)
             targetpos = new Vector3(camera.transform.position.x - xShift, camera.transform.position.y, -10);
         else

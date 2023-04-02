@@ -35,6 +35,7 @@ public class GetKey : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         a.SetActive(false);
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         gameObject.GetComponent<Collider2D>().enabled = false;
         gameObject.GetComponent<TilemapCollider2D>().enabled = false;
         gameObject.GetComponent<Tilemap>().color = new Color(255, 255, 255, 0.3f);
