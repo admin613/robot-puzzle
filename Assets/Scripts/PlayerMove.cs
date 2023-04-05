@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
     public float flashTime;
     public float flashInterval;
     public Image DamageIndicator;
+    public AudioSource AudioSource;
     bool touchingspikes;
 
 
@@ -61,6 +62,11 @@ public class PlayerMove : MonoBehaviour
 
         direction = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(movespeed * direction, rb.velocity.y);
+
+        if (Mathf.Abs(direction) > 0.0001f)
+            AudioSource.enabled = true;
+        else
+            AudioSource.enabled = false;
 
         animator.SetFloat("Speed", Mathf.Abs(direction));
     if(!flipped)
