@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     public Transform GroundCheck;
     public LayerMask GroundLayer;
     public float jumpforce;
+    public bool flipped = false;
 
     [Header("Shooting")]
     public Transform LaserSpawn;
@@ -61,21 +62,37 @@ public class PlayerMove : MonoBehaviour
         rb.velocity = new Vector2(movespeed * direction, rb.velocity.y);
 
         animator.SetFloat("Speed", Mathf.Abs(direction));
-
-        if(direction < 0 && facingRight)
+    if(!flipped)
         {
-            Flip();
+            if (direction < 0 && facingRight)
+            {
+                Flip();
+            }
+            else if (direction > 0 && !facingRight)
+            {
+                Flip();
+            }
         }
-        else if (direction > 0 && !facingRight)
+     else
         {
-            Flip();
+            if (direction > 0 && facingRight)
+            {
+                Flip();
+            }
+            else if (direction < 0 && !facingRight)
+            {
+                Flip();
+            }
         }
 
 
         IsGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.3f, GroundLayer);
         if(IsGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
+            if(flipped == false) 
             rb.velocity = new Vector2(rb.velocity.x, jumpforce);
+            else
+                rb.velocity = new Vector2(rb.velocity.x, -jumpforce);
             animator.SetBool("IsJumping", true);
             Invoke("DoneJumping", 0.4f);
        
@@ -141,8 +158,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.tag == "Spikes")
         {
             
-            touchingspikes = true;
-            StartCoroutine(DamageFlash());
+
         }
 
         if (collision.gameObject.tag == "Shift")
@@ -163,22 +179,9 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Spikes")
-        {
-            touchingspikes = false;
-            StopCoroutine(DamageFlash());
-        }
+        
     }
-    IEnumerator DamageFlash()
-    {
-        while (touchingspikes == true)
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-            yield return new WaitForSeconds(flashTime);
-            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            yield return new WaitForSeconds(flashInterval);
-        }
-    }
+    
 
 }
  

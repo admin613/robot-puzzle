@@ -31,9 +31,7 @@ public class Laser : MonoBehaviour
             tb.switchTile();
         }
         if(collision.gameObject.tag != "Player")
-        {   
             Destroy(gameObject);
-        }
 
     }
 }

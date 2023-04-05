@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private bool shift = false;
     public float speed = 1.0f;
     private Vector3 targetpos;
-    private bool inoroutlevel = true;
+    public bool inoroutlevel = true;
     public PlayerMove pm;
     
 
@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
 
 
     public void ShiftCamera(bool isleft)
-    {   
+    {
+        inoroutlevel = true;
         blocker.GetComponent<BoxCollider2D>().isTrigger = false;
         
         if(isleft)
