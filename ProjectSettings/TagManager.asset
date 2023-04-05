@@ -17,6 +17,7 @@ TagManager:
   - leftshift
   - key
   - Laser
+  - deathlaser
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using UnityEngine;
 public class JumpBlock : MonoBehaviour
 {
     public Rigidbody2D player;
+    public PlayerMove pv;
     public float bounceforce = 1700f;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,9 @@ public class JumpBlock : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player") 
         {
-            player.AddForce(Vector2.up * bounceforce);
+            
+                player.AddForce(Vector2.up * bounceforce);
+           
         }
     }
 }

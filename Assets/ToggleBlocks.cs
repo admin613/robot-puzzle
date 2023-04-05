@@ -6,11 +6,16 @@ public class ToggleBlocks : MonoBehaviour
 {
     public bool Toggle;
     public Tilemap tilemap;
+    public bool originaltoggle;
     public TileBase tile;
+    public Death dead;
     private TilemapCollider2D tp;
     // Start is called before the first frame update
     void Start()
     {
+      
+        originaltoggle = Toggle;
+        
         tilemap = GetComponent<Tilemap>();
         tp = GetComponent<TilemapCollider2D>();
         foreach (var position in tilemap.cellBounds.allPositionsWithin)
@@ -39,6 +44,42 @@ public class ToggleBlocks : MonoBehaviour
     void Update()
     {
         
+      if(dead.died == true)
+        {
+            Debug.Log("a");
+            Toggle = originaltoggle;
+            StartCoroutine(waiter());
+            
+        }
+    }
+    IEnumerator waiter()
+    {
+       
+        yield return new WaitForSeconds(0.5f);
+        dead.died = false;
+        foreach (var position in tilemap.cellBounds.allPositionsWithin)
+        {
+            if (position != null)
+            {
+                tilemap.RemoveTileFlags(position, TileFlags.LockColor);
+                if (Toggle == true)
+                {
+                    tp.enabled = true;
+                    tilemap.SetColor(position, new Color(255, 255, 255, 255));
+
+                }
+                else
+                {
+                    tp.enabled = false;
+                    tilemap.SetColor(position, new Color(255, 255, 255, 0.3f));
+
+                }
+
+            }
+        }
+
+        
+
     }
     public void switchTile()
     {

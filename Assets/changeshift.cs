@@ -20,7 +20,11 @@ public class changeshift : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        gameManager.yShift = newyshift;
-        gameManager.xShift = newxshift;
+        if (collision.gameObject.tag == "Player")
+        {
+            gameManager.yShift = newyshift;
+            gameManager.xShift = newxshift;
+        }
+           
     }
 }

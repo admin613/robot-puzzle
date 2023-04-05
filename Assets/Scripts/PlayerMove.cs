@@ -38,6 +38,7 @@ public class PlayerMove : MonoBehaviour
     [Header("AreaShift")]
     public GameManager manager;
     private bool ioujump = true;
+    public Death dead;
 
     [Header("Take Damage")]
     public float flashTime;
@@ -136,7 +137,18 @@ public class PlayerMove : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.tag == "jumppad")
-            rb.AddForce(Vector2.up * bounceforce);
+        {
+            if(flipped)
+                rb.AddForce(Vector2.down * bounceforce);
+            else
+                rb.AddForce(Vector2.up * bounceforce);
+        }
+            
+        if(collision.collider.gameObject.tag == "deathlaser")
+        {
+            Debug.Log("a");
+            dead.respawn();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

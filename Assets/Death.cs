@@ -8,6 +8,7 @@ public class Death : MonoBehaviour
     public PlayerMove pv;
     public GameObject playerprefab;
     public GameObject respawnpoint;
+    public bool died = false;
     public Animator animator;
     
     // Start is called before the first frame update
@@ -28,8 +29,10 @@ public class Death : MonoBehaviour
     }
     public void respawn()
     {
-       animator.SetTrigger("death");
+        died = true;
+        animator.SetTrigger("death");
         Player.GetComponent<PlayerMove>().enabled = false;
+        
         Player.GetComponent<Rigidbody2D>().bodyType =  RigidbodyType2D.Static;
        StartCoroutine(waiter());
       
@@ -37,6 +40,7 @@ public class Death : MonoBehaviour
     IEnumerator waiter()
     {
         yield return new WaitForSeconds(0.45f);
+        
         if(pv.flipped)
         {
             if (!pv.facingRight)
