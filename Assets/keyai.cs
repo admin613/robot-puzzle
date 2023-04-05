@@ -6,6 +6,7 @@ using UnityEngine;
 public class keyai : MonoBehaviour
 {
     public AIPath path;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class keyai : MonoBehaviour
         
         if(collision.gameObject.tag == "Player")
         {
+            audioSource.Play();
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             path.enabled = true;
         }

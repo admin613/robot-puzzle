@@ -10,6 +10,7 @@ public class Death : MonoBehaviour
     public GameObject respawnpoint;
     public bool died = false;
     public Animator animator;
+    public AudioSource deathsound;
     
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,9 @@ public class Death : MonoBehaviour
     public void respawn()
     {
         died = true;
+        deathsound.Play();
         animator.SetTrigger("death");
+
         Player.GetComponent<PlayerMove>().enabled = false;
         
         Player.GetComponent<Rigidbody2D>().bodyType =  RigidbodyType2D.Static;

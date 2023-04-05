@@ -8,6 +8,7 @@ public class GetKey : MonoBehaviour
 {
     public AIDestinationSetter Destination;
     public Transform trans;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +35,7 @@ public class GetKey : MonoBehaviour
     IEnumerator fade(GameObject a)
     {
         yield return new WaitForSeconds(1f);
+        audioSource.Play();
         a.SetActive(false);
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         gameObject.GetComponent<Collider2D>().enabled = false;

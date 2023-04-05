@@ -8,10 +8,11 @@ public  class Button : MonoBehaviour
     public GameObject ToggleOffMap;
     public GameObject ToggleOnMap;
     public Sprite TurnedOnSprite;
+    public AudioSource audioSource;
     bool TurnedOn;
     void Start()
     {
-
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public  class Button : MonoBehaviour
     {
         if (collision.gameObject.tag == "Laser")
         {
+            audioSource.Play();
             gameObject.GetComponent<SpriteRenderer>().sprite = TurnedOnSprite;
             if(ToggleOffMap != null)
                 ToggleOffMap.GetComponent<ToggleBlocks>().switchTile();

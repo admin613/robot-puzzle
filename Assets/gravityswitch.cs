@@ -8,6 +8,7 @@ public class gravityswitch : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject player;
     public PlayerMove pv;
+    public AudioSource ad;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class gravityswitch : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            ad.Play();
             if (pv.flipped == false && !pv.facingRight)
             {
                 player.transform.eulerAngles = new Vector3(0, 0, 180f);

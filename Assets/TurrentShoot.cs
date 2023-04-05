@@ -12,6 +12,7 @@ public class TurrentShoot : MonoBehaviour
     public GameObject LaserFab;
     private bool cooldown = true;
     public float laserSpeed = 1f;
+    public AudioSource audioSource;
     public float speed;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class TurrentShoot : MonoBehaviour
     IEnumerator shoot()
     {
         yield return new WaitForSeconds(speed);
+        
         GameObject laserclone = Instantiate(LaserFab, LaserSpawn.position, transform.rotation);
         if (facingupdown)
         {

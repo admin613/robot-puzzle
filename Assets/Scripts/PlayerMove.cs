@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public bool facingRight;
     public int bounceforce = 1500;
     private ToggleBlocks tb;
+    public AudioSource lasersound;
 
 
     [Header("Jumping")]
@@ -22,7 +23,7 @@ public class PlayerMove : MonoBehaviour
     public LayerMask GroundLayer;
     public float jumpforce;
     public bool flipped = false;
-
+    public AudioSource boing;
     [Header("Shooting")]
     public Transform LaserSpawn;
     public GameObject LaserFab;
@@ -108,6 +109,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
+            lasersound.Play();
             Shoot();
         }
     }
@@ -144,6 +146,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.collider.gameObject.tag == "jumppad")
         {
+            boing.Play();
             if(flipped)
                 rb.AddForce(Vector2.down * bounceforce);
             else
